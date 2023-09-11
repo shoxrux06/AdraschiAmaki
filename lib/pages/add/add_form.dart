@@ -38,7 +38,7 @@ class _AddScreenFormState extends State<AddScreenForm> {
   List<File> selectedImages = [];
   List<District> districtList = [];
 
-  bool isHaveDiscount = false;
+  bool isHaveAdditionalParams = false;
 
   final picker = ImagePicker();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -289,31 +289,12 @@ class _AddScreenFormState extends State<AddScreenForm> {
                             return null;
                           },
                         ),
-                        const SizedBox(
-                          height: 20,
-                        ),
+                        const SizedBox(height: 20,),
                         MyTextFormField2(
-                          l10n?.width ?? '',
+                          l10n?.rulomPrice ?? '',
                           null,
-                          _widthController,
-                          suffixText: 'sm',
+                          _sizeController,
                           keyboardType: TextInputType.number,
-                          validator: (val) {
-                            if (val!.isEmpty) {
-                              return 'Iltimos maydonni to\'ldiring';
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        MyTextFormField2(
-                          l10n?.height ?? '',
-                          null,
-                          _highController,
-                          keyboardType: TextInputType.number,
-                          suffixText: 'metr',
                           validator: (val) {
                             if (val!.isEmpty) {
                               return 'Iltimos maydonni to\'ldiring';
@@ -447,46 +428,67 @@ class _AddScreenFormState extends State<AddScreenForm> {
                           },
                         ),
                         const SizedBox(height: 20,),
-                        MyTextFormField2(
-                          l10n?.size ?? '',
-                          null,
-                          _sizeController,
-                          validator: (val) {
-                            if (val!.isEmpty) {
-                              return 'Iltimos maydonni to\'ldiring';
-                            }
-                            return null;
-                          },
-                        ),
                         const SizedBox(
                           height: 20,
                         ),
                         CheckboxListTile(
                           title: Text('${l10n?.discount}'),
-                            value: isHaveDiscount,
+                            value: isHaveAdditionalParams,
                             onChanged: (val){
                             setState(() {
-                              isHaveDiscount = !isHaveDiscount;
+                              isHaveAdditionalParams = !isHaveAdditionalParams;
                             });
 
                         }),
                         const SizedBox(
                           height: 20,
                         ),
-                        isHaveDiscount? MyTextFormField2(
+                        isHaveAdditionalParams? MyTextFormField2(
                           '20 %' ?? '',
                           null,
                           _discountController,
                           keyboardType: TextInputType.number,
                           suffixText: '%',
-                          validator: (val) {
-                            if (val!.isEmpty) {
-                              return 'Iltimos maydonni to\'ldiring';
-                            }
-                            return null;
-                          },
+                          // validator: (val) {
+                          //   if (val!.isEmpty) {
+                          //     return 'Iltimos maydonni to\'ldiring';
+                          //   }
+                          //   return null;
+                          // },
                         ): Container(),
-                        SizedBox(height: isHaveDiscount?20:0,),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        isHaveAdditionalParams?MyTextFormField2(
+                          l10n?.width ?? '',
+                          null,
+                          _widthController,
+                          suffixText: 'sm',
+                          keyboardType: TextInputType.number,
+                          // validator: (val) {
+                          //   if (val!.isEmpty) {
+                          //     return 'Iltimos maydonni to\'ldiring';
+                          //   }
+                          //   return null;
+                          // },
+                        ): Container(),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        isHaveAdditionalParams?MyTextFormField2(
+                          l10n?.height ?? '',
+                          null,
+                          _highController,
+                          keyboardType: TextInputType.number,
+                          suffixText: 'metr',
+                          // validator: (val) {
+                          //   if (val!.isEmpty) {
+                          //     return 'Iltimos maydonni to\'ldiring';
+                          //   }
+                          //   return null;
+                          // },
+                        ): Container() ,
+                        SizedBox(height: isHaveAdditionalParams?20:0,),
                         CustomButton(
                           widget.productDetail == null
                               ? l10n?.publish ?? ''
@@ -509,7 +511,7 @@ class _AddScreenFormState extends State<AddScreenForm> {
                                     brand: _brandController.text,
                                     gramm: _grammController.text,
                                     discountPrice:int.tryParse(_discountController.text),
-                                    size: _sizeController.text
+                                    rulomPrice: int.parse(_sizeController.text)
                                 ),
                               ));
                             }
@@ -530,7 +532,7 @@ class _AddScreenFormState extends State<AddScreenForm> {
                                       brand: _brandController.text,
                                       gramm: _grammController.text,
                                       discountPrice: int.tryParse(_discountController.text??''),
-                                      size: _sizeController.text
+                                      rulomPrice: int.parse(_sizeController.text)
                                   ),
                                   widget.productDetail?.id??0
                               ));

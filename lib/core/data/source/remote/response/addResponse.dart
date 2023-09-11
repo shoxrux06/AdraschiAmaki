@@ -39,7 +39,6 @@ class Data {
   String discount;
   String eni;
   String boyi;
-  String size;
   String color;
   String ishlabChiqarishTuri;
   String mahsulotTola;
@@ -59,7 +58,6 @@ class Data {
     required this.discount,
     required this.eni,
     required this.boyi,
-    required this.size,
     required this.color,
     required this.ishlabChiqarishTuri,
     required this.mahsulotTola,
@@ -74,20 +72,19 @@ class Data {
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-    id: json["id"],
-    category: json["category"],
-    price: json["price"],
+    id: json["id"]??0,
+    category: json["category"]??'',
+    price: json["price"]??'',
     discount: json["discount"] ?? '',
-    eni: json["eni"],
-    boyi: json["boyi"],
-    size: json["size"],
-    color: json["color"],
-    ishlabChiqarishTuri: json["ishlab_chiqarish_turi"],
+    eni: json["eni"] ??'',
+    boyi: json["boyi"] ??'',
+    color: json["color"] ??'',
+    ishlabChiqarishTuri: json["ishlab_chiqarish_turi"]??'',
     mahsulotTola: json["mahsulot_tola"],
-    brand: json["brand"],
-    user: json["user"],
-    likes: json["likes"],
-    views: json["views"],
+    brand: json["brand"] ??'',
+    user: json["user"] ??'',
+    likes: json["likes"] ??0,
+    views: json["views"] ??0,
     createdAt:json["created_at"] != null? DateTime.parse(json["created_at"]): DateTime.now(),
     updatedAt:json["updated_at"] != null? DateTime.parse(json["updated_at"]): DateTime.now(),
     photos: List<dynamic>.from(json["photos"].map((x) => x)),
@@ -101,7 +98,6 @@ class Data {
     "discount": discount,
     "eni": eni,
     "boyi": boyi,
-    "size": size,
     "color": color,
     "ishlab_chiqarish_turi": ishlabChiqarishTuri,
     "mahsulot_tola": mahsulotTola,

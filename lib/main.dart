@@ -4,6 +4,8 @@ import 'package:afisha_market/core/bloc/auth/authBloc.dart';
 import 'package:afisha_market/core/bloc/gallery/gallery_bloc.dart';
 import 'package:afisha_market/core/bloc/language/language_bloc.dart';
 import 'package:afisha_market/core/bloc/language/language_event.dart';
+import 'package:afisha_market/core/bloc/notification/notification_bloc.dart';
+import 'package:afisha_market/core/bloc/orders/orders_bloc.dart';
 import 'package:afisha_market/core/constants/app_pages.dart';
 import 'package:afisha_market/core/constants/app_routes.dart';
 import 'package:afisha_market/core/data/models/language_model.dart';
@@ -65,8 +67,10 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<HomeBloc>(create: (context) => HomeBloc(homeRepository, filterRepository)),
+        BlocProvider<OrdersBloc>(create: (context) => OrdersBloc(ordersRepository)),
         BlocProvider<AdvBloc>(create: (context) => AdvBloc(advRepository)),
-        BlocProvider<GalleryBloc>(create: (context) => GalleryBloc()),
+        BlocProvider<AdvBloc>(create: (context) => AdvBloc(advRepository)),
+        BlocProvider<NotificationBloc>(create: (context) => NotificationBloc(notificationRepository)),
         BlocProvider<AuthBloc>(create: (context) => AuthBloc(authRepository)),
         BlocProvider<CreateBloc>(create: (context) => CreateBloc(productRepository)),
         BlocProvider<ProductDetailBloc>(

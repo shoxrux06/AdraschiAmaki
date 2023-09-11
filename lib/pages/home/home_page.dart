@@ -1,10 +1,16 @@
 import 'package:afisha_market/core/bloc/home/home_bloc.dart';
+import 'package:afisha_market/core/bloc/notification/notification_bloc.dart';
+import 'package:afisha_market/core/bloc/notification/notification_event.dart';
+import 'package:afisha_market/core/bloc/notification/notification_state.dart';
+import 'package:afisha_market/core/bloc/orders/orders_bloc.dart';
+import 'package:afisha_market/core/bloc/orders/orders_event.dart';
 import 'package:afisha_market/core/data/source/remote/response/RegionResponse.dart';
 import 'package:afisha_market/core/di/dependency_manager.dart';
 import 'package:afisha_market/pages/components/shimmers/product_grid_list_shimmer.dart';
 import 'package:afisha_market/pages/home/widget/app_bar.dart';
 import 'package:afisha_market/pages/home/widget/carousel_slider.dart';
 import 'package:afisha_market/pages/home/widget/product_item.dart';
+import 'package:afisha_market/pages/notification/notification_page.dart';
 import 'package:afisha_market/pages/product_detail/ProductDetailPage.dart';
 import 'package:afisha_market/pages/utils/const.dart';
 import 'package:afisha_market/pages/utils/custom_button_two.dart';
@@ -31,6 +37,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     bloc.add(HomeInitEvent());
+    context.read<NotificationBloc>().add(GetUnReadNotificationsEvent());
     bloc.add(HomeGetMaterialTypes());
     print('Home page');
     super.initState();
@@ -73,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                                   bloc.add(HomeSearchEvent(searchText));
                                 });
                               })),
-                              GestureDetector(
+                              InkWell(
                                 onTap: () {
                                   showModalBottomSheet(
                                     context: context,
@@ -135,7 +142,7 @@ class _HomePageState extends State<HomePage> {
                                               })
                                             ),
                                             SizedBox(height: customHeight * 0.01,),
-                                            Spacer(),
+                                            const Spacer(),
                                             CustomButtonTwo(l10n?.apply??'', onTap: (){
                                               context.read<HomeBloc>().add(HomeFilterProductsByMaterialTypes(state.materialTypeResponse?.mahsulotTolasi[selectedMaterialTypeIndex].name??''));
                                               // setState((){
@@ -151,7 +158,6 @@ class _HomePageState extends State<HomePage> {
                                   );
                                 },
                                 child: Container(
-                                    margin: const EdgeInsets.only(right: 16),
                                     width: 50,
                                     height: 50,
                                     padding: const EdgeInsets.all(12),
@@ -160,7 +166,36 @@ class _HomePageState extends State<HomePage> {
                                       borderRadius: BorderRadius.circular(15),
                                     ),
                                     child: SvgPicture.asset("assets/icons/filter_inside.svg")),
-                              )
+                              ),
+                              BlocBuilder<NotificationBloc, NotificationState>(builder: (context,state){
+                                // if(state.unReadNotificationResponse == null || (state.unReadNotificationResponse?.notifications.isEmpty ?? false)){
+                                //   return Container();
+                                // }
+                                return Stack(
+                                  children: [
+                                    IconButton(onPressed: (){
+                                      print('PRESSED');
+                                      Navigator.of(context).push(MaterialPageRoute(builder: (_) => NotificationPage()));
+                                    }, icon: const Icon(Icons.notifications, size: 32, color: Colors.black,)),
+                                    (state.unReadNotificationResponse == null || (state.unReadNotificationResponse?.notifications.isEmpty ?? false)? Container():Positioned(
+                                      left: 6,
+                                      top: 10,
+                                      child: Container(
+                                        width: 16,
+                                        height: 16,
+                                        decoration: BoxDecoration(
+                                            color: Colors.red,
+                                            borderRadius: BorderRadius.circular(16)
+                                        ),
+                                        child: Center(
+                                            child: Text('${state.unReadNotificationResponse?.notifications.length}', style: TextStyle(fontSize: 10, color: Colors.white, fontWeight: FontWeight.bold),)
+                                        ),
+                                      ),
+                                    ))
+                                  ],
+                                );
+                              }),
+                              SizedBox(width: 4,)
                             ],
                           ),
                           Container(

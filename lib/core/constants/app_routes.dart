@@ -5,6 +5,7 @@ abstract class AppRoutes{
   static const String otp = '/otp';
   static const String newPassword = '/newPassword';
   static const String home = '/home';
+  static const String orders = '/orders';
   static const String main = '/main';
   static const String productDetail = '/productDetail';
 }

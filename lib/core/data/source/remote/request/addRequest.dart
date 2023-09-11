@@ -17,7 +17,7 @@ class CreateRequest {
   String? brand;
   String? gramm;
   int? discountPrice;
-  String? size;
+  int? rulomPrice;
 
   CreateRequest({
     required this.categoryId,
@@ -31,7 +31,7 @@ class CreateRequest {
     required this.brand,
     required this.gramm,
     required this.discountPrice,
-    required this.size,
+    required this.rulomPrice,
   });
 
   Future<Map<String, dynamic>> toJson() async {
@@ -49,7 +49,7 @@ class CreateRequest {
     json['brand'] = brand;
     json['gramm'] = gramm;
     json['discount'] = discountPrice;
-    json['size'] = size;
+    json['rulom_narx'] = rulomPrice;
     return json;
   }
 }

@@ -3,6 +3,7 @@ import 'package:afisha_market/pages/auth/signUp/SignUpScreen.dart';
 import 'package:afisha_market/pages/home/home_page.dart';
 import 'package:afisha_market/pages/introduction/languageScreen.dart';
 import 'package:afisha_market/pages/main_container.dart';
+import 'package:afisha_market/pages/orders/orders_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../pages/auth/forgotPassword/ForgotPasswordScreen.dart';
@@ -37,6 +38,10 @@ abstract class AppPages {
       case AppRoutes.home:
         return MaterialPageRoute(
           builder: (_) => const HomePage(),
+        );
+      case AppRoutes.orders:
+        return MaterialPageRoute(
+          builder: (_) => const OrdersPage(),
         );
       case AppRoutes.main:
         return MaterialPageRoute(

@@ -29,7 +29,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
         color: Color(0xFFF5F5F5),
         borderRadius: BorderRadius.circular(15),
       ),
-      margin: EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 15),
+      margin: EdgeInsets.only(top: 15, left: 15, right: 8, bottom: 15),
       height: 50,
       child: TextField(
         controller: _searchController,

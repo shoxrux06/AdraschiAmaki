@@ -159,10 +159,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                               .product[0].ishlabChiqarishTuri))
                                     ],
                                   ),
-                                  const SizedBox(
-                                    height: 10,
+                                  SizedBox(
+                                    height:(widget.product?.eni.isEmpty ??false)? 0:10,
                                   ),
-                                  Row(
+                                  (widget.product?.eni.isEmpty ??false)? Container():Row(
                                     children: [
                                       Expanded(
                                           child: Text(
@@ -176,10 +176,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                           child: Text('${state.product[0].eni} sm'))
                                     ],
                                   ),
-                                  const SizedBox(
-                                    height: 10,
+                                  SizedBox(
+                                    height: (widget.product?.boyi.isEmpty ??false)?0: 10,
                                   ),
-                                  Row(
+                                  (widget.product?.boyi.isEmpty ??false)? Container():Row(
                                     children: [
                                       Expanded(
                                           child: Text(
@@ -259,7 +259,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                           )),
                                       const SizedBox(width: 20),
                                       Expanded(
-                                          child: discountPrice == 0? Text('0 %'): Text('${state.product[0].discount} %',
+                                          child: discountPrice == 0? Text('0 %',style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)): Text('${state.product[0].discount} %',
                                             style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
                                           )
                                       )

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:afisha_market/core/utils/local_storage.dart';
 import 'package:afisha_market/pages/add/add_screen.dart';
 import 'package:afisha_market/pages/home/home_page.dart';
+import 'package:afisha_market/pages/orders/orders_page.dart';
 import 'package:afisha_market/pages/utils/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -57,7 +58,8 @@ class _MainContainerState extends State<MainContainer> {
     pages = [
       const HomePage(),
       const AdvScreen(),
-      const AddScreen()
+      const AddScreen(),
+      const OrdersPage()
     ];
     super.initState();
   }
@@ -129,6 +131,30 @@ class _MainContainerState extends State<MainContainer> {
                     blueColor,
                     BlendMode.srcIn,
                   ),
+                ),
+              ),
+              BottomNavigationBarItem(
+                icon: Image.asset(
+                  'assets/icons/order.png',
+                  color: Color(0xFF999999),
+                  width: 24,
+                  height: 24,
+                  // colorFilter: const ColorFilter.mode(
+                  //   Color(0xFF999999),
+                  //   BlendMode.srcIn,
+                  // ),
+                ),
+                label: l10n?.orders?? 'Orders',
+                backgroundColor: mainColor,
+                activeIcon: Image.asset(
+                  'assets/icons/order.png',
+                  color:  blueColor,
+                  width: 24,
+                  height: 24,
+                  // colorFilter: ColorFilter.mode(
+                  //   blueColor,
+                  //   BlendMode.srcIn,
+                  // ),
                 ),
               ),
             ],

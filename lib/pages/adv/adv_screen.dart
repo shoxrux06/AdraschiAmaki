@@ -63,7 +63,7 @@ class _AdvScreenState extends State<AdvScreen> {
                       child: Container(
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                            color: mainColor,
+                            color: blueColor,
                             borderRadius: BorderRadius.circular(8),
                             border: Border.all(
                                 color: mainColor,
