@@ -419,7 +419,7 @@ class _AddScreenFormState extends State<AddScreenForm> {
                           null,
                           _grammController,
                           keyboardType: TextInputType.number,
-                          suffixText: 'gramm',
+                          suffixText: '${l10n?.gr}',
                           validator: (val) {
                             if (val!.isEmpty) {
                               return 'Iltimos maydonni to\'ldiring';

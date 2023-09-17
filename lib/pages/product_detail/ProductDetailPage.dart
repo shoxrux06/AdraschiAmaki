@@ -242,7 +242,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                           )),
                                       const SizedBox(width: 20),
                                       Expanded(
-                                          child: Text('${ state.product[0].gramm} gramm'))
+                                          child: Text('${ state.product[0].gramm} ${l10n?.gr}'))
                                     ],
                                   ),
                                   const SizedBox(
@@ -252,7 +252,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                     children: [
                                       Expanded(
                                           child: Text(
-                                            'Chegirma' ?? '',
+                                            '${l10n?.discountText}' ?? '',
                                             textAlign: TextAlign.end,
                                             style:
                                             const TextStyle(color: Colors.grey),

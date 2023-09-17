@@ -35,7 +35,8 @@ class _OrdersPageState extends State<OrdersPage> {
                 onTap: (){
                   Navigator.of(context).push(MaterialPageRoute(builder: (_) => OrderDetailsPage(orderId: state.ordersResponse!.data[index].id)));
                 },
-                child: OrderItem(order: state.ordersResponse!.data[index]));
+                child: OrderItem(order: state.ordersResponse!.data[index])
+            );
           },
         );
       },)

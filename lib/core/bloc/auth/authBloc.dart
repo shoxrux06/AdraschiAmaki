@@ -9,18 +9,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   AuthBloc(this._authRepository) : super(AuthState()) {
     on<SignInEvent>((event, emit) async {
-      emit(AuthState(isAuthenticating: true));
+      emit(state.copyWith(isAuthenticating: true));
       try {
         emit(AuthState(status: AuthStatus.loading));
-        final signInResponse = await _authRepository.signIn(event.context,event.signInRequest);
+        final signInResponse =
+            await _authRepository.signIn(event.context, event.signInRequest);
         signInResponse.when(
           success: (data) async {
-            emit(AuthState(
+            emit(
+              state.copyWith(
                 signInResponse: data,
                 status: AuthStatus.success,
                 isAuthenticated: true,
-                isAuthenticating: false
-            )
+                isAuthenticating: false,
+              ),
             );
             await LocalStorage.instance.setToken(data.token);
             await LocalStorage.instance.setUserId(data.user.id);
@@ -28,20 +30,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             await LocalStorage.instance.setUserPhone(data.user.phone);
           },
           failure: (failure) {
-            emit(AuthState(
-                status: AuthStatus.error,
-                isErrorOccurred: true,
-                isAuthenticating: false
-            )
+            emit(
+              state.copyWith(
+                  status: AuthStatus.error,
+                  isErrorOccurred: true,
+                  isAuthenticating: false
+              ),
             );
           },
         );
       } catch (_) {
-        emit(AuthState(
-            status: AuthStatus.error,
-            isErrorOccurred: true,
-            isAuthenticating: false
-        ));
+        emit(
+          state.copyWith(
+              status: AuthStatus.error,
+              isErrorOccurred: true,
+              isAuthenticating: false
+          ),
+        );
       }
     });
   }
